@@ -20,7 +20,7 @@
 </style>
 <body>
   <div id="root">
-    <h2>扫描二维码 </h2>
+    <h2>扫描二维码 s</h2>
     <div id="cameras"></div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -79,29 +79,30 @@
             Quagga.start();
            
           });
+         },
+           initCameraSelection() {
+           
+           let self = this
+           var streamLabel = Quagga.CameraAccess.getActiveStreamLabel();
+           alert('来了')
+           return Quagga.CameraAccess.enumerateVideoDevices()
+             .then(function (devices) {
+               alert('来了老弟')
+               self.deviceId = device[1].deviceId
+
+
+
+               if (self.onlyOne) {
+                 self.onlyOne = false
+
+                 Quagga.stop()
+                 self.init()
+               }
+
+             });
          }
-       },
-       initCameraSelection () {
-          alert('来了')
-         let self = this
-         var streamLabel = Quagga.CameraAccess.getActiveStreamLabel();
-         alert('来了')
-         return Quagga.CameraAccess.enumerateVideoDevices()
-           .then(function (devices) {
-             alert('来了老弟')
-            self.deviceId = device[1].deviceId
-
-             
-            
-             if (self.onlyOne) {
-               self.onlyOne = false
-
-               Quagga.stop()
-               self.init()
-             }
-
-           });
        }
+     
      })
   </script>
 </body>
