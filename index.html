@@ -5,10 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+<style>
+  *{
+    padding: 0;
+    margin: 0;
+  }
+  .cameras{
+     width: 350px;
+     height: 350px;
+     margin: 50px auto;
+  }
+</style>
 <body>
   <div id="root">
-    <h2>扫描二维码e </h2>
-    <div class="cameras"></div>
+    <h2>扫描二维码 </h2>
+    <div id="cameras"></div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="./quagga.js"></script>
@@ -20,7 +31,7 @@
          state: {
            inputStream: {
              type: "LiveStream",
-             target: document.querySelector('.cameras'),
+             target: document.querySelector('#cameras'),
              constraints: {
                width: { min: 560 },
                height: { min: 450 },
@@ -50,8 +61,8 @@
        methods:{
          init (){
           var self = this;
-          alert('rest')
-          Quagga.init(this.state, function (err) {
+      
+          Quagga.init(self.state, function (err) {
             if (err) {
               console.log(err);
             }
