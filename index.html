@@ -30,6 +30,7 @@
        el: document.getElementById('root'),
        data:{
          deviceId: '',
+         onlyOne: true,
          state: {
            inputStream: {
              type: "LiveStream",
@@ -38,7 +39,7 @@
                width: { min: 560 },
                height: { min: 450 },
                facingMode: "environment",
-               deviceId: '',
+               deviceId: this.deviceId,
                aspectRatio: { min: 1, max: 2 }
              }
            },
@@ -72,11 +73,32 @@
             }
             //Quagga.registerResultCollector(resultCollector);
 
-
-            //  self.initCameraSelection();
+             
+            self.initCameraSelection();
             Quagga.start();
           });
          }
+       },
+       initCameraSelection: function () {
+         let self = this
+         var streamLabel = Quagga.CameraAccess.getActiveStreamLabel();
+         alert('来了')
+         return Quagga.CameraAccess.enumerateVideoDevices()
+           .then(function (devices) {
+             alert('来了老弟')
+            self.deviceId = device[1].deviceId
+
+             function pruneText(text) {
+               return text.length > 30 ? text.substr(0, 30) : text;
+             }
+            
+             if (self.onlyOne) {
+               self.onlyOne = false
+               Quagga.stop()
+               self.init()
+             }
+
+           });
        }
      })
   </script>
