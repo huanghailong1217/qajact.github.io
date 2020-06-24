@@ -20,7 +20,7 @@
 </style>
 <body>
   <div id="root">
-    <h2>扫描二维码 尔萨s人 </h2>
+    <h2>扫描二维码 </h2>
     <div id="cameras"></div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -45,7 +45,7 @@
           Quagga.init({
             inputStream: {
              type: "LiveStream",
-             target: document.getElementById('root'),
+             target: document.getElementById('cameras'),
              constraints: {
                width: { min: 560 },
                height: { min: 450 },
@@ -75,7 +75,7 @@
             }
             //Quagga.registerResultCollector(resultCollector);
         
-            this.initCameraSelection();
+            self.initCameraSelection();
             Quagga.start();
            
           });
