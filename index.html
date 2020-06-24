@@ -20,7 +20,7 @@
 </style>
 <body>
   <div id="root">
-    <h2>扫描二维码 ser </h2>
+    <h2>扫描二维码 er </h2>
     <div id="cameras"></div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -73,10 +73,10 @@
             }
             //Quagga.registerResultCollector(resultCollector);
         
-             
-            // self.initCameraSelection();
+             alert(self.state)
+            self.initCameraSelection();
             Quagga.start();
-            alert(Quagga.start())
+           
           });
          }
        },
