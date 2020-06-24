@@ -18,7 +18,7 @@
 </style>
 <body>
   <div id="root">
-    <h2>扫描二维码 </h2>
+    <h2>扫描二维码s  </h2>
     <div id="cameras"></div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -63,6 +63,7 @@
           var self = this;
       
           Quagga.init(self.state, function (err) {
+            alert(33)
             if (err) {
               console.log(err);
             }
