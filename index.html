@@ -20,7 +20,7 @@
 </style>
 <body>
   <div id="root">
-    <h2>扫描二维码 尔萨人 </h2>
+    <h2>扫描二维码 尔萨s人 </h2>
     <div id="cameras"></div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -32,7 +32,18 @@
          deviceId: '',
          onlyOne: true,
          state: {
-           inputStream: {
+           
+         }
+       },
+       mounted() {
+          this.init()
+       },
+       methods:{
+         init (){
+          var self = this;
+      
+          Quagga.init({
+            inputStream: {
              type: "LiveStream",
              target: document.getElementById('root'),
              constraints: {
@@ -43,29 +54,20 @@
                aspectRatio: { min: 1, max: 2 }
              }
            },
-           locator: {
+            locator: {
              patchSize: "medium",
              halfSample: true
            },
-           numOfWorkers: 1,
-           frequency: 10,
-           decoder: {
+             numOfWorkers: 1,
+             frequency: 10,
+             decoder: {
              readers: [{
                format: "code_93_reader",
                config: {}
              }]
            },
-           locate: true
-         }
-       },
-       mounted() {
-          this.init()
-       },
-       methods:{
-         init (){
-          var self = this;
-      
-          Quagga.init(self.state, function (err) {
+             locate: true
+          }, function (err) {
           
             if (err) {
                alert('333')
@@ -73,7 +75,7 @@
             }
             //Quagga.registerResultCollector(resultCollector);
         
-            self.initCameraSelection();
+            this.initCameraSelection();
             Quagga.start();
            
           });
