@@ -10,7 +10,7 @@
     padding: 0;
     margin: 0;
   }
-  .cameras{
+  #cameras{
      width: 350px;
      height: 350px;
      border: 1px solid red;
@@ -66,16 +66,17 @@
           var self = this;
       
           Quagga.init(self.state, function (err) {
-           alert(33)
+          
             if (err) {
                alert(err)
               console.log(err);
             }
             //Quagga.registerResultCollector(resultCollector);
-
+            alert(33)
              
             self.initCameraSelection();
             Quagga.start();
+             alert(333)
           });
          }
        },
