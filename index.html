@@ -20,7 +20,7 @@
 </style>
 <body>
   <div id="root">
-    <h2>扫描二维码  </h2>
+    <h2>扫描二维码 ser </h2>
     <div id="cameras"></div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -88,12 +88,11 @@
              alert('来了老弟')
             self.deviceId = device[1].deviceId
 
-             function pruneText(text) {
-               return text.length > 30 ? text.substr(0, 30) : text;
-             }
+             
             
              if (self.onlyOne) {
                self.onlyOne = false
+
                Quagga.stop()
                self.init()
              }
