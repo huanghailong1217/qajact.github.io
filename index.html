@@ -34,7 +34,7 @@
          state: {
            inputStream: {
              type: "LiveStream",
-             target: document.getElementById('cameras'),
+             target: document.getElementById('root'),
              constraints: {
                width: { min: 560 },
                height: { min: 450 },
@@ -72,7 +72,7 @@
               console.log(err);
             }
             //Quagga.registerResultCollector(resultCollector);
-            alert(33)
+        
              
             // self.initCameraSelection();
             Quagga.start();
