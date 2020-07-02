@@ -23,7 +23,7 @@
 
 <body>
   <div id="root">
-    <h2>扫描二维码terese</h2>
+    <h2>asssssss</h2>
     <select id="selected" @change="handleSelect">
       <option v-for="item in devices" :key="item.deviceId" :value="item.deviceId">{{item.deviceId}}</option>
     </select>
@@ -56,7 +56,7 @@
               console.log(err);
             }
               alert('来了老弟ya ')
-            self.initCameraSelection();
+            //self.initCameraSelection();
             Quagga.start();
             Quagga.onDetected(function (result) {
 
@@ -110,10 +110,12 @@
           self.deviceId = devices[1].deviceId
           self.devices = devices
           if (self.onlyOne) {
-              alert('来了老弟')
-            self.onlyOne = false
-            Quagga.stop()
             self.init()
+              alert('来了老弟a')
+            
+            self.onlyOne = false
+           // Quagga.stop()
+            
           }
 
         });
