@@ -77,7 +77,14 @@
         
             self.initCameraSelection();
             Quagga.start();
-           
+            Quagga.onDetected(function (result) {
+
+              var code = result.codeResult.code;
+             alert(code)
+
+              Quagga.stop()
+            }
+      });
           });
          },
            initCameraSelection() {
