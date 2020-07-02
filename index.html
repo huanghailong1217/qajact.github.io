@@ -114,7 +114,14 @@
           if (self.onlyOne) {
             self.init()
               alert('来了老弟a')
+            Quagga.onDetected(function (result) {
+
+              var code = result.codeResult.code;
+              alert(code)
+
+              Quagga.stop()
             
+            });
             self.onlyOne = false
            // Quagga.stop()
             
