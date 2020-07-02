@@ -105,7 +105,7 @@
       return Quagga.CameraAccess.enumerateVideoDevices()
         .then(function (devices) {
         alert('来了老弟ya ')
-          self.deviceId = device[1].deviceId
+          self.deviceId = devices[1].deviceId
           self.devices = devices
           if (self.onlyOne) {
               alert('来了老弟')
