@@ -1,3 +1,35 @@
+Skip to content
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+
+@huanghailong1217
+huanghailong1217
+/
+qajact.github.io
+1
+00
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+Settings
+qajact.github.io/index.html
+@huanghailong1217
+huanghailong1217 sdf
+…
+Latest commit 05e341d 9 minutes ago
+History
+1 contributor
+148 lines (130 sloc) 3.38 KB
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,7 +55,7 @@
 
 <body>
   <div id="root">
-    <h2>啬宫和</h2>
+    <h2>啬s宫和</h2>
     <select id="selected" @change="handleSelect">
       <option v-for="item in devices" :key="item.deviceId" :value="item.deviceId">{{item.deviceId}}</option>
     </select>
@@ -45,103 +77,94 @@
       },
       mounted() {
         this.initCameraSelection()
-        this.$nextTick(function () {
-            Quagga.onDetected(function (result) {
-              alert('sdf')
-              var code = result.codeResult.code;
-              alert(code)
+        Quagga.onDetected(function (result) {
+          alert('result')
+          var code = result.codeResult.code;
+          alert(code)
 
-              Quagga.stop()
-            
-            });
-        })
+          Quagga.stop()
+
+        });
+        
         //this.init()
       },
       methods: {
         init() {
           var self = this;
           Quagga.init(this.states(), function (err) {
-
+             alert('来了老弟ya ')
             if (err) {
               alert('333')
               console.log(err);
             }
-              alert('来了老弟ya ')
+           
             //self.initCameraSelection();
             Quagga.start();
-            Quagga.onDetected(function (result) {
-
-              var code = result.codeResult.code;
-              alert(code)
-
-              Quagga.stop()
-            
-            });
-         });
-    },
-    states () {
-      return {
-        inputStream: {
-          type: "LiveStream",
-          target: document.getElementById('cameras'),
-          constraints: {
-            width: { min: 560 },
-            height: { min: 450 },
-            facingMode: "environment",
-            deviceId: this.deviceId,
-            aspectRatio: { min: 1, max: 2 }
+          });
+        },
+        states() {
+          return {
+            inputStream: {
+              type: "LiveStream",
+              target: document.getElementById('cameras'),
+              constraints: {
+                width: { min: 560 },
+                height: { min: 450 },
+                facingMode: "environment",
+                deviceId: this.deviceId,
+                aspectRatio: { min: 1, max: 2 }
+              }
+            },
+            locator: {
+              patchSize: "medium",
+              halfSample: true
+            },
+            numOfWorkers: 1,
+            frequency: 10,
+            decoder: {
+              readers: [{
+                format: "code_93_reader",
+                config: {}
+              }]
+            },
+            locate: true
           }
         },
-        locator: {
-          patchSize: "medium",
-          halfSample: true
+        handleSelect() {
+          alert('触发')
+          this.init()
         },
-        numOfWorkers: 1,
-        frequency: 10,
-        decoder: {
-          readers: [{
-            format: "code_93_reader",
-            config: {}
-          }]
-        },
-        locate: true
+        initCameraSelection() {
+          let self = this
+          var streamLabel = Quagga.CameraAccess.getActiveStreamLabel();
+          alert(streamLabel)
+          return Quagga.CameraAccess.enumerateVideoDevices()
+            .then(function (devices) {
+
+              alert('来了peyt ')
+              self.deviceId = devices[1].deviceId
+              self.devices = devices
+              if (self.onlyOne) {
+                self.init()
+                alert('来了老弟a')
+                Quagga.onDetected(function (result) {
+                  alert('来了a')
+                  var code = result.codeResult.code;
+                  alert(code)
+
+                  Quagga.stop()
+
+                });
+                self.onlyOne = false
+                // Quagga.stop()
+
+              }
+
+            });
+        }
       }
-    },
-    handleSelect () {
-      alert('触发')
-      this.init()
-    },
-    initCameraSelection() {
-      let self = this
-      var streamLabel = Quagga.CameraAccess.getActiveStreamLabel();
-      alert(streamLabel)
-      return Quagga.CameraAccess.enumerateVideoDevices()
-        .then(function (devices) {
 
-        alert('来了peyt ')
-          self.deviceId = devices[1].deviceId
-          self.devices = devices
-          if (self.onlyOne) {
-            self.init()
-              alert('来了老弟a')
-            Quagga.onDetected(function (result) {
-
-              var code = result.codeResult.code;
-              alert(code)
-
-              Quagga.stop()
-            
-            });
-            self.onlyOne = false
-           // Quagga.stop()
-            
-          }
-
-        });
-    }
-       }
-     
-     })
+    })
   </script>
 </body>
 
