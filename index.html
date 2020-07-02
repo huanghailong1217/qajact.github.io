@@ -23,7 +23,7 @@
 
 <body>
   <div id="root">
-    <h2>扫描二维码s</h2>
+    <h2>扫描二维码terese</h2>
     <select id="selected" @change="handleSelect">
       <option v-for="item in devices" :key="item.deviceId" :value="item.deviceId">{{item.deviceId}}</option>
     </select>
@@ -106,8 +106,8 @@
       return Quagga.CameraAccess.enumerateVideoDevices()
         .then(function (devices) {
 
-        alert('来了老弟ya ')
-          self.deviceId = device[1].deviceId
+        alert('来了peyt ')
+          self.deviceId = devices[1].deviceId
           self.devices = devices
           if (self.onlyOne) {
               alert('来了老弟')
