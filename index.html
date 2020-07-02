@@ -22,7 +22,7 @@
 
 <body>
   <div id="root">
-    <h2>大的变化</h2>
+    <h2>df大的变化</h2>
     <select id="selected" @change="handleSelect">
       <option v-for="item in devices" :key="item.deviceId" :value="item.deviceId">{{item.deviceId}}</option>
     </select>
@@ -43,37 +43,13 @@
         devices: []
       },
       mounted() {
+        this.onlyOne = true
         this.initCameraSelection()
       },
       methods: {
         init() {
           var self = this;
-          Quagga.init({
-            inputStream: {
-              type: "LiveStream",
-              target: document.getElementById('cameras'),
-              constraints: {
-                width: { min: 560 },
-                height: { min: 450 },
-                facingMode: "environment",
-                deviceId: this.deviceId,
-                aspectRatio: { min: 1, max: 2 }
-              }
-            },
-            locator: {
-              patchSize: "medium",
-              halfSample: true
-            },
-            numOfWorkers: 1,
-            frequency: 10,
-            decoder: {
-              readers: [{
-                format: "code_93",
-                config: {}
-              }]
-            },
-            locate: true
-          }, function (err) {
+          Quagga.init(this.states(), function (err) {
              alert('来了老弟ya ')
             if (err) {
               alert('333')
@@ -112,12 +88,7 @@
         },
         handleSelect() {
           this.init()
-          Quagga.onDetected(function (result) {
-            alert('result')
-            var code = result.codeResult.code;
-            alert(code)
-            Quagga.stop()
-          });
+          
         },
         initCameraSelection() {
           let self = this
@@ -129,14 +100,12 @@
               self.devices = devices
               if (self.onlyOne) {
                 self.init()
-                Quagga.onDetected(function (result) {
-                
-                  var code = result.codeResult.code;
-                 
+                Quagga.onDetected(function (data) {
+                  var code = data.codeResult.code;
+                  alert(code)
                   Quagga.stop()
                 });
                 
-               
                 self.onlyOne = false
                 // Quagga.stop()
               }
