@@ -13,7 +13,7 @@
 
   #cameras {
     width: 350px;
-    height: 640px;
+    height: 150px;
     border: 1px solid red;
     overflow: hidden;
     margin: 50px auto;
@@ -22,7 +22,7 @@
 
 <body>
   <div id="root">
-    <h2>df大的变s化</h2>
+    <h2>df大的变化</h2>
     <select id="selected" @change="handleSelect">
       <option v-for="item in devices" :key="item.deviceId" :value="item.deviceId">{{item.deviceId}}</option>
     </select>
@@ -65,7 +65,7 @@
               target: document.getElementById('cameras'),
               constraints: {
                 width: { min: 350 },
-                height: { min: 640 },
+                height: { min: 150 },
                 facingMode: "environment",
                 deviceId: this.deviceId,
                 aspectRatio: { min: 1, max: 2 }
