@@ -23,7 +23,7 @@
 
 <body>
   <div id="root">
-    <h2>扫描二维码</h2>
+    <h2>扫描二维码s</h2>
     <select id="selected" @change="handleSelect">
       <option v-for="item in devices" :key="item.deviceId" :value="item.deviceId">{{item.deviceId}}</option>
     </select>
@@ -43,55 +43,58 @@
         devices: []
       },
       mounted() {
+        this.initCameraSelection()
         this.init()
       },
       methods: {
         init() {
           var self = this;
-
-          Quagga.init({
-            inputStream: {
-              type: "LiveStream",
-              target: document.getElementById('cameras'),
-              constraints: {
-                width: { min: 560 },
-                height: { min: 450 },
-                facingMode: "environment",
-                deviceId: this.deviceId,
-                aspectRatio: { min: 1, max: 2 }
-              }
-            },
-            locator: {
-              patchSize: "medium",
-              halfSample: true
-            },
-            numOfWorkers: 1,
-            frequency: 10,
-            decoder: {
-              readers: [{
-                format: "code_93_reader",
-                config: {}
-              }]
-            },
-            locate: true
-          }, function (err) {
+          Quagga.init(self.states, function (err) {
 
             if (err) {
               alert('333')
               console.log(err);
             }
-            alert('来了老弟ya ')
+              alert('来了老弟ya ')
             self.initCameraSelection();
             Quagga.start();
             Quagga.onDetected(function (result) {
 
               var code = result.codeResult.code;
               alert(code)
-        
+
               Quagga.stop()
             
             });
          });
+    },
+    states () {
+      return {
+        inputStream: {
+          type: "LiveStream",
+          target: document.getElementById('cameras'),
+          constraints: {
+            width: { min: 560 },
+            height: { min: 450 },
+            facingMode: "environment",
+            deviceId: this.deviceId,
+            aspectRatio: { min: 1, max: 2 }
+          }
+        },
+        locator: {
+          patchSize: "medium",
+          halfSample: true
+        },
+        numOfWorkers: 1,
+        frequency: 10,
+        decoder: {
+          readers: [{
+            format: "code_93_reader",
+            config: {}
+          }]
+        },
+        locate: true
+      }
     },
     handleSelect () {
       this.init()
