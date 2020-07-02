@@ -43,7 +43,6 @@
         devices: []
       },
       mounted() {
-        alert('来了')
         this.init()
       },
       methods: {
@@ -99,14 +98,14 @@
       this.init()
     },
     initCameraSelection() {
-
-      let self = this
-      var streamLabel = Quagga.CameraAccess.getActiveStreamLabel();
       alert('来了')
+      let self = this
+      Quagga.CameraAccess.getActiveStreamLabel();
+     
       return Quagga.CameraAccess.enumerateVideoDevices()
         .then(function (devices) {
         alert('来了老弟ya ')
-          self.deviceId = devices[1].deviceId
+          self.deviceId = device[1].deviceId
           self.devices = devices
           if (self.onlyOne) {
               alert('来了老弟')
