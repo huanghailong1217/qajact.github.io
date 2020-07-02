@@ -23,7 +23,7 @@
 
 <body>
   <div id="root">
-    <h2>扫描二维码</h2>
+    <h2>扫描二维e码</h2>
     <select id="selected" @change="handleSelect">
       <option v-for="item in devices" key="item" value="item">{{item}}</option>
     </select>
@@ -82,7 +82,20 @@
             }
             //Quagga.registerResultCollector(resultCollector);
 
-            self.initCameraSelection();
+            Quagga.CameraAccess.getActiveStreamLabel();
+
+            Quagga.CameraAccess.enumerateVideoDevices().then(function (devices) {
+              alert('来了老弟ya ')
+              self.deviceId = device[1].deviceId
+              self.devices = devices
+              if (self.onlyOne) {
+                alert('来了老弟')
+                self.onlyOne = false
+                Quagga.stop()
+                self.init()
+              }
+
+            });
             Quagga.start();
             Quagga.onDetected(function (result) {
 
@@ -97,25 +110,7 @@
     handleSelect () {
       this.init()
     },
-    initCameraSelection() {
-      alert('来了9')
-      let self = this
-      Quagga.CameraAccess.getActiveStreamLabel();
-     
-      return Quagga.CameraAccess.enumerateVideoDevices()
-        .then(function (devices) {
-        alert('来了老弟ya ')
-          self.deviceId = device[1].deviceId
-          self.devices = devices
-          if (self.onlyOne) {
-              alert('来了老弟')
-            self.onlyOne = false
-            Quagga.stop()
-            self.init()
-          }
-
-        });
-    }
+   
        }
      
      })
