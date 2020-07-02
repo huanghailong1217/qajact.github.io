@@ -40,23 +40,24 @@
         state: {
 
         },
+        form: this,
         devices: []
       },
       mounted() {
-        this.initCameraSelection()
+        //this.initCameraSelection()
         this.init()
       },
       methods: {
         init() {
           var self = this;
-          Quagga.init(self.states, function (err) {
+          Quagga.init(this.states, function (err) {
 
             if (err) {
               alert('333')
               console.log(err);
             }
               alert('来了老弟ya ')
-            //self.initCameraSelection();
+            self.initCameraSelection();
             Quagga.start();
             Quagga.onDetected(function (result) {
 
@@ -97,6 +98,7 @@
       }
     },
     handleSelect () {
+      alert('触发')
       this.init()
     },
     initCameraSelection() {
