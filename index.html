@@ -93,10 +93,7 @@
             multiple: false,
             frequency: 10,
             decoder: {
-              readers: [{
-                format: "code_93_reader",
-                config: {}
-              }]
+              readers:  ["code_128_reader", "code_93_reader"]
             },
             locate: true
           }
